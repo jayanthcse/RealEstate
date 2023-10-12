@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ML Model Prediction</title>
+</head>
+<body>
+    <h1>ML Model Prediction</h1>
+    <form id="prediction-form">
+        <label for="total_sqft">Total Sqft:</label>
+        <input type="text" id="total_sqft" name="total_sqft" required><br><br>
+        
+        <label for="bath">Bathrooms:</label>
+        <input type="text" id="bath" name="bath" required><br><br>
+        
+        <label for="bhk">BHK:</label>
+        <input type="text" id="bhk" name="bhk" required><br><br>
+
+        <input type="submit" value="Predict">
+    </form>
+    
+    <h2>Predicted Price:</h2>
+    <p id="predicted-price"></p>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#prediction-form").submit(function(e) {
+                e.preventDefault();
+                var formData = {
+                    "total_sqft": $("#total_sqft").val(),
+                    "bath": $("#bath").val(),
+                    "bhk": $("#bhk").val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/predict",
+                    contentType: "application/json",
+                    data: JSON.stringify(formData),
+                    success: function(response) {
+                        $("#predicted-price").text("Predicted Price: " + response.predictions[0]);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
