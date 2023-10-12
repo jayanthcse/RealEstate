@@ -1,2 +1,3 @@
 # RealEstate
 Cleaned the data set and applied suitable ML algorithm to the model
+i have taken this Real estate data set from the kaggle , then i started to clen the data set by adjusting the null rows , adding new rows like price per sq.ft , have removed the outliers, and some other changes which are mentioned in the code , then i have used grid search cv to try various models for their scores and decided to use linear regression , then uploaded this model into apickle file and into a python flask server and ran it in backend and collected input from from front end and make server run that and produce results back in the website.
